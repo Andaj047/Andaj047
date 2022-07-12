@@ -23,7 +23,7 @@ jobs:
       - name: default deploy
         uses: Andaj047/Andaj047@v3
         with:
-          stage: Dev
+          stage: dev
           aws_region: eu-west-1
           function_name: my-function
           zip_file: bundle.zip
