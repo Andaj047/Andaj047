@@ -21,7 +21,7 @@ jobs:
         env:
           CI: true
       - name: default deploy
-        uses: git_user/git_repo_name@v3
+        uses: Andaj047/Andaj047@v3
         with:
           stage: Dev
           aws_region: eu-west-1
