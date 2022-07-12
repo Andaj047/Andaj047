@@ -6,10 +6,26 @@ on:
       - dev
 
 jobs:
-  call-reusable-workflow:
-    uses: ./.github/workflows/reusable-workflow.yml
-    with:
-      stage: dev
-    secrets:
-      AWS_ACCESS_KEY_ID: ${{ secrets.DEV_AWS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.DEV_AWS_SECRET_ACCESS_KEY }}
+  deploy_source:
+    name: build and deploy lambda
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        dotnet: ['3.1.x']
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: ${{ matrix.dotnet }}
+        env:
+          CI: true
+      - name: default deploy
+        uses: Andaj047/Andaj047@dev
+        with:
+          stage: dev
+          aws_region: eu-west-1
+          function_name: myfunction
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.DEV_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.DEV_AWS_SECRET_ACCESS_KEY }}
