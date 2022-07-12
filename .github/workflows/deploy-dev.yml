@@ -13,7 +13,7 @@ jobs:
       matrix:
         dotnet: ['3.1.x']
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
       - name: Setup dotnet
         uses: actions/setup-dotnet@v2
         with:
@@ -21,7 +21,7 @@ jobs:
         env:
           CI: true
       - name: default deploy
-        uses: Andaj047/Andaj047@v3
+        uses: Andaj047/Andaj047@v2
         with:
           stage: dev
           aws_region: eu-west-1
